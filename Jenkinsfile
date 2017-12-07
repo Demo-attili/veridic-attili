@@ -1,22 +1,25 @@
-#!/usr/bin/env groovy
-properties([
-    [$class: 'GithubProjectProperty',
-    displayName: '',
-    projectUrlStr: 'https://github.com/VeridicSolutions99/Veridic_Atlanta.git/'],
-    pipelineTriggers([githubPush()])])
-
 pipeline {
     agent any
-
     parameters {
-        booleanParam(defaultValue: true, description: '', name: 'userFlag')
-    }
+       choice(choices: 'Integration', description: 'Choose the environment', name: 'ENVIRONMENT')
+       booleanParam(name: 'DEBUG', defaultValue: false, description: 'check the box ') 
+       booleanParam(name: 'DEPLOY', defaultValue: false, description: 'check the box ') 
+       string(name: 'Branch   ', defaultValue: 'Default ', description: 'Select required branch.')
 
+
+    }
+    
     stages {
-        stage("foo") {
+        stage('Example') {
             steps {
-                echo "flag: ${params.userFlag}"
+                echo "Hello ${params.ENVIRONMENT}"
             }
         }
-    }
+        
+        
+        
+        
+        
+    }    
+   
 }
