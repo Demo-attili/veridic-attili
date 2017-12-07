@@ -6,24 +6,16 @@ properties([
     pipelineTriggers([githubPush()])])
 
 pipeline {
-    agent any 
+    agent any
+
+    parameters {
+        booleanParam(defaultValue: true, description: '', name: 'userFlag')
+    }
 
     stages {
-        stage('Build') { 
-            steps { 
-                sh 'pwd' 
-            }
-        }
-        stage('Test'){
+        stage("foo") {
             steps {
-                sh 'java -version'
-                
-            }
-        }
-        stage('Deploy') {
-            steps {
-                sh 'ls'
-                sh 'pwd'
+                echo "flag: ${params.userFlag}"
             }
         }
     }
